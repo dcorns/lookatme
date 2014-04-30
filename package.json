@@ -1,0 +1,29 @@
+{
+  "name": "lookatme",
+  "version": "0.0.0",
+  "description": "Online Resume",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcorns/lookatme.git"
+  },
+  "author": "Dale Corns",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dcorns/lookatme/issues"
+  },
+  "homepage": "https://github.com/dcorns/lookatme",
+  "private": true,
+  "dependencies": {
+    "express": "^4.1.1",
+    "handlebars": "^2.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^0.12.1"
+  }
+}
