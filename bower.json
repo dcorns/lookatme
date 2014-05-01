@@ -1,0 +1,17 @@
+{
+  "name": "lookatme",
+  "version": "0.0.0",
+  "homepage": "https://github.com/dcorns/lookatme",
+  "authors": [
+    "Dale Corns <drcorns@hotmail.com>"
+  ],
+  "description": "Online Resume",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
