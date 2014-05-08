@@ -6,8 +6,8 @@ var app = express();
 var bodyParser = require('body-parser'); //for getting data from a post
 var mongoose = require('mongoose');
 var User = require('./app/assets/js/models/user');
-//var handlebars = require('handlebars');
-//var cons = require('consolidate');
+var handlebars = require('handlebars');
+var cons = require('consolidate');
 
 
 app.use(bodyParser());
@@ -91,18 +91,30 @@ router.route('/users/:user_id')
 });
 
 
-router.get('/', function(req, res) {
-    res.json({
-        message: 'Welcome to Online Resume'
-    });
-});
+//router.get('/', function(req, res) {
+//  res.json({
+//    message: 'Welcome to Online Resume'
+//});
+//});
+
+
+
 
 app.use('/api', router); //prefix every route with /api
 //set up views
-//app.engine('hbs', cons.handlebars);
-//app.set('view engine', 'hbs');
-//app.set('views', __dirname + '/app/assets/templates');
-
+app.engine('hbs', cons.handlebars);
+app.set('view engine', 'hbs');
+app.set('views', __dirname + '/app/assets/templates');
+// display landing page
+app.get('/', function(req, res) {
+    // render the page
+    res.render('index', {
+        partials: {
+            'content': 'user',
+        },
+        subTitle: 'Login',
+    });
+});
 
 
 mongoose.connect('mongodb://localhost/onlineResumeDev');

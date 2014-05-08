@@ -1,4 +1,8 @@
 module.exports = function(grunt) {
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-shell-spawn');
+
     grunt.initConfig({
 
         watch: {
@@ -9,9 +13,25 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             }
+        },
+
+        shell: {
+            mongodb: {
+                command: 'mongod',
+                options: {
+                    async: true,
+                    stdout: false,
+                    stderr: true,
+                    failOnError: true,
+                    execOptions: {
+                        cwd: '.'
+                    }
+                }
+            }
         }
+
     });
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.registerTask('default', 'watch')
+
+    grunt.registerTask('default', ['shell:mongodb', 'watch']);
 };
