@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell-spawn');
+    grunt.loadNpmTasks('grunt-express-server');
 
     grunt.initConfig({
 
@@ -11,6 +12,13 @@ module.exports = function(grunt) {
                 tasks: ['sass'],
                 options: {
                     livereload: true
+                }
+            },
+            express: {
+                files: ['**/*.js'],
+                tasks: ['express:dev'],
+                options: {
+                    spawn: false // for grunt-contrib-watch v0.5.0+, "nospawn: true" for lower versions. Without this option specified express won't be reloaded
                 }
             }
         },
@@ -28,10 +36,32 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+        express: {
+            options: {
+                port: 8080
+            },
+            dev: {
+                options: {
+                    script: 'server.js'
+                }
+            },
+            prod: {
+                options: {
+                    script: 'server.js',
+                    node_env: 'production'
+                }
+            },
+            test: {
+                options: {
+                    script: 'server.js'
+                }
+            }
         }
 
     });
 
-
-    grunt.registerTask('default', ['shell:mongodb', 'watch']);
+    //when using watch, all the watch tasks must preceed watch in the registerTask statement
+    grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
+    grunt.registerTask('server', ['express:dev', 'watch']);
 };
