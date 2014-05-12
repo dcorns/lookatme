@@ -37,12 +37,14 @@
     "grunt-express-server": "^0.4.17",
     "grunt-mocha-cov": "^0.2.1",
     "grunt-mongoimport": "^0.1.3",
+    "grunt-phantom": "^0.2.1",
     "grunt-sass": "^0.12.1",
     "grunt-shell-spawn": "^0.3.0",
     "handlebars": "^1.3.0",
     "hbsfy": "^1.3.2",
     "mocha-term-cov-reporter": "^0.2.0",
     "mongoose": "^3.8.8",
+    "node-sass": "^0.8.6",
     "supertest": "^0.12.0"
   }
 }

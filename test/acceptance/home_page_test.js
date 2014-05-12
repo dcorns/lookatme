@@ -1,17 +1,17 @@
 'use strict';
 
-casper.test.begin('home page', 3, functions suite(test) {
+casper.test.begin('home page', 3, function suite(test) {
 
-    casper.start('http://localhost:3000/', function() {
+    casper.start('http://localhost:8080/', function() {
         test.assertHttpStatus(200);
     });
 
     casper.then(function() {
-        test.assertTitle('Hello World Express', 'title is Hello World Express');
+        test.assertTitle('OnlineResume | Home', 'title is OnlineResume | Home');
     });
 
     casper.then(function() {
-        test.assertSelectorHasText('hi', 'Hello World');
+        test.assertSelectorHasText('h1', 'My Porfollio');
     });
 
     casper.run(function() {

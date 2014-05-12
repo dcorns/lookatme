@@ -90,15 +90,11 @@ router.route('/users/:user_id')
     });
 });
 
-
 //router.get('/', function(req, res) {
 //  res.json({
 //    message: 'Welcome to Online Resume'
 //});
 //});
-
-
-
 
 app.use('/api', router); //prefix every route with /api
 //set up views

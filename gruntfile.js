@@ -3,6 +3,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-shell-spawn');
     grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-casper');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.initConfig({
 
@@ -57,11 +59,23 @@ module.exports = function(grunt) {
                     script: 'server.js'
                 }
             }
+        },
+
+        casper: {
+            acceptance: {
+                options: {
+                    test: true,
+                },
+                files: {
+                    'test/acceptance/casper-results.xml': ['test/acceptance/*_test.js']
+                }
+            }
         }
 
     });
 
     //when using watch, all the watch tasks must preceed watch in the registerTask statement
     grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('server', ['express:dev', 'watch']);
+    grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
+    grunt.registerTask('test', ['shell:mongodb', 'express:dev', 'casper', 'watch']);
 };
