@@ -32,7 +32,8 @@ module.exports = function(grunt) {
                     async: true,
                     stdout: false,
                     stderr: true,
-                    failOnError: true,
+                    //set to false to keep from failing if mongodb already running as can happen when a test fails and stops grunt without stoping the database
+                    failOnError: false,
                     execOptions: {
                         cwd: '.'
                     }
