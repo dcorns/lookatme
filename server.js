@@ -9,6 +9,7 @@ var handlebars = require('handlebars');
 var cons = require('consolidate');
 var MongoClient = require('mongodb').MongoClient;//npm install mongodb
 var Server = require('mongodb').Server; //npm install mongodb
+var BSON = require('mongodb').BSONPure; //npm install mongodb
 //var format = require('util').format; //used for mongo db
 
 //Configure mongo connection
@@ -59,7 +60,7 @@ router.route('/users')
     user.awards = req.body.awards;
     user.references = req.body.references;
 
-    user.save(function(err) {
+    db.collection('users').insert({firstName: req.body.firstName},function(err, inserted) {
         if (err)
             res.send(err);
 
@@ -71,45 +72,37 @@ router.route('/users')
 
 //get all users accessed at /api/users
 .get(function(req, res) {
-        MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err, db) {
-            if(err) throw err;
-            //var query = { 'grade' : 100 };
             db.collection('users').find().toArray(function(err, docs) {
                 //if(err) throw err;
                 if (err)
                     res.send(err);
                 res.json(docs);
                 console.dir(docs); //remove for production
-
-                db.close();
             });
-        });
 });
 
 //On routes that end in /users/:user_id
 //Note /:param1/:param2/:param3...(req.params.param1 etc.) and ?getvar1=value&getvar2=value&getvar3=value...(req.query.getvar1 etc.)
-router.route('/users/:_id')
+router.route('/users/:id')
 //Find user by id
 .get(function(req, res) {
-    MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function (err, db){
-      if(err) throw err;
+      //Convert string id to ObjectID
+      var query = BSON.ObjectID.createFromHexString(req.params.id);
 
-      var query = req.params;
       console.dir(query);
       //console.dir(db.collection('users').findOne(query));
-      db.collection('users').findOne({}, function(err, doc){
+      db.collection('users').findOne({_id: query}, function(err, doc){
         if (err) res.send(err);
         res.json(doc);
         console.dir(doc); //remove after testing
-        db.close();
       });
-    });
 })
 
 .put(function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
+    db.collection('users').findOne(req.params.user_id, function(err, user) {
         if (err)
             res.send(err);
+      var user = new User();
         user.firstName = req.body.firstName;
         user.middleName = req.body.middleName;
         user.lastName = req.body.lastName;
@@ -128,7 +121,7 @@ router.route('/users/:_id')
         user.awards = req.body.awards;
         user.references = req.body.references;
 
-        user.save(function(err) {
+      db.collection('users').update({lastName: req.body.lastName},function(err) {
             if (err)
                 res.send(err);
             res.json({
@@ -139,8 +132,9 @@ router.route('/users/:_id')
 })
 
 .delete(function(req, res) {
-    User.remove({
-        _id: req.params.user_id
+    var id = BSON.ObjectID.createFromHexString(req.params.id);
+    db.collection('users').remove({
+        _id: id
     }, function(err, user) {
         if (err)
             res.send(err);
