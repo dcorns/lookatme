@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var UserSchema = mongoose.Schema({
+var UserSchema = new Schema({
     lastName: String,
     middleName: String,
     firstName: String,
@@ -26,4 +27,4 @@ var UserSchema = mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('UserData', UserSchema);
