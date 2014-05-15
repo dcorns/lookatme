@@ -59,8 +59,8 @@ router.route('/users')
     user.certifications = req.body.certifications;
     user.awards = req.body.awards;
     user.references = req.body.references;
-
-    db.collection('users').insert({firstName: req.body.firstName},function(err, inserted) {
+console.dir(user);
+    db.collection('users').insert(user,function(err, inserted) {
         if (err)
             res.send(err);
 
@@ -81,7 +81,7 @@ router.route('/users')
             });
 });
 
-//On routes that end in /users/:user_id
+//On routes that end in /api/users/:user_id
 //Note /:param1/:param2/:param3...(req.params.param1 etc.) and ?getvar1=value&getvar2=value&getvar3=value...(req.query.getvar1 etc.)
 router.route('/users/:id')
 //Find user by id
@@ -89,8 +89,6 @@ router.route('/users/:id')
       //Convert string id to ObjectID
       var query = BSON.ObjectID.createFromHexString(req.params.id);
 
-      console.dir(query);
-      //console.dir(db.collection('users').findOne(query));
       db.collection('users').findOne({_id: query}, function(err, doc){
         if (err) res.send(err);
         res.json(doc);
@@ -99,29 +97,16 @@ router.route('/users/:id')
 })
 
 .put(function(req, res) {
-    db.collection('users').findOne(req.params.user_id, function(err, user) {
+    var id = BSON.ObjectID.createFromHexString(req.params.id);
+    var query = {'_id': id};
+    db.collection('users').findOne(query, function(err, doc) {
         if (err)
             res.send(err);
-      var user = new User();
-        user.firstName = req.body.firstName;
-        user.middleName = req.body.middleName;
-        user.lastName = req.body.lastName;
-        user.email = req.body.email;
-        user.mobilePhone = req.body.mobilePhone;
-        user.homePhone = req.body.homePhone;
-        user.workPhone = req.body.workPhone;
-        user.objective = req.body.objective;
-        user.userLinks = req.body.userLinks;
-        user.skills = req.body.skills;
-        user.education = req.body.education;
-        user.employmentHistory = req.body.employmentHistory;
-        user.interests = req.body.interests;
-        user.publications = req.body.publications;
-        user.certifications = req.body.certifications;
-        user.awards = req.body.awards;
-        user.references = req.body.references;
 
-      db.collection('users').update({lastName: req.body.lastName},function(err) {
+      query._id = doc._id;
+      //put request objects are found in res.query
+      doc.lastName = req.query.lastName;
+      db.collection('users').update(query, doc, function(err, updated) {
             if (err)
                 res.send(err);
             res.json({

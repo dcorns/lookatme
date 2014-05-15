@@ -1,29 +1,33 @@
-var mongoose = require('mongoose');
+'use strict';
+function User() {
+  var user = {
 
-var UserSchema = mongoose.Schema({
-    lastName: String,
-    middleName: String,
-    firstName: String,
-    email: String,
-    mobilePhone: String,
-    homePhone: String,
-    workPhone: String,
-    objective: String,
-    links: [],
-    skills: [],
-    education: [],
-    employmentHistory: [],
-    interests: [],
-    publications: [],
-    certifications: [],
-    awards: [],
-    references: [{
-        name: String,
-        phone: String,
-        company: String,
-        comment: String
-    }]
+      lastName: "",
+      middleName: "",
+      firstName: "",
+      email: "",
+      mobilePhone: "",
+      homePhone: "",
+      workPhone: "",
+      objective: "",
+      links: [],
+      skills: [],
+      education: [],
+      employmentHistory: [],
+      interests: [],
+      publications: [],
+      certifications: [],
+      awards: [],
+      references: [
+        {
+          name: "",
+          phone: "",
+          company: "",
+          comment: ""
+        }
+      ]
+    }
+  return user;;
+}
 
-});
-
-module.exports = mongoose.model('user', UserSchema);
+module.exports = User
