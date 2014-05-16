@@ -6,6 +6,7 @@ var app = express();
 var bodyParser = require('body-parser'); //for getting data from a post
 var User = require('./api/models/user');
 var UserRoutes = require('./api/routes/userroutes.js');
+var dataBase = require('./api/database');
 var handlebars = require('handlebars');
 var cons = require('consolidate');
 var MongoClient = require('mongodb').MongoClient;//npm install mongodb
@@ -72,15 +73,7 @@ console.dir(user);
 })
 
 //get all users accessed at /api/users
-.get(function(req, res) {
-            db.collection('users').find().toArray(function(err, docs) {
-                //if(err) throw err;
-                if (err)
-                    res.send(err);
-                res.json(docs);
-                console.dir(docs); //remove for production
-            });
-});
+.get(function(req, res){dataBase.getAllUsers(req, res);});
 
 //On routes that end in /api/users/:user_id
 //Note /:param1/:param2/:param3...(req.params.param1 etc.) and ?getvar1=value&getvar2=value&getvar3=value...(req.query.getvar1 etc.)
@@ -151,11 +144,12 @@ app.get('/',UserRoutes.landing);
     });*/
 //});
 
-
+app.listen(port);
+console.log('Listening on port ' + port);
 //connect to the mongo db and don't run the web server unless the connection to the db is successful
-mongoclient.open(function (err, mongoclient){
+/*mongoclient.open(function (err, mongoclient){
   if(err) throw err;
   app.listen(port);
-  console.log('Listening on port' + port);
+  console.log('Listening on port' + port);*/
 
-})
+//})
