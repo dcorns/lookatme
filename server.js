@@ -4,7 +4,8 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser'); //for getting data from a post
-var User = require('./app/assets/js/models/user');
+var User = require('./api/models/user');
+var UserRoutes = require('./api/routes/userroutes.js');
 var handlebars = require('handlebars');
 var cons = require('consolidate');
 var MongoClient = require('mongodb').MongoClient;//npm install mongodb
@@ -134,12 +135,13 @@ app.use('/api', router); //prefix every route with /api
 //set up views
 
 // display landing page
-app.get('/', function(req, res) {
+app.get('/',UserRoutes.landing);
+ /*function(req, res) {
     // render the page
   //Called after connection to mongodb succeeds, it finds the first valid document in the users collection
   db.collection('users').findOne({}, function(err,doc){
     res.render('index', doc); //Any handlebar fields on index matching doc field names loaded here
-  });
+  });*/
  // res.render('index', {lastName : 'Dale Corns'});
     /*res.render('index', {
         partials: {
@@ -147,7 +149,7 @@ app.get('/', function(req, res) {
         },
         subTitle: 'Login',
     });*/
-});
+//});
 
 
 //connect to the mongo db and don't run the web server unless the connection to the db is successful
