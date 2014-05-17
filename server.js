@@ -11,7 +11,6 @@ var cons = require('consolidate');
 
 app.use(bodyParser());
 
-
 //Handlebars setup
 app.engine('hbs', cons.handlebars);
 app.set('view engine', 'hbs');
