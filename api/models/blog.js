@@ -1,16 +1,19 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+'use strict';
 
-var BlogSchema = new Schema({
-    author: String,
-    topic: String,
-    title: String,
-    searchTerms: [],
-    body: String,
-    citations: [],
-    bibliography: [],
-    body: String
+function Blog(){
+  var blog = {
+    date:"",
+    author: "",
+    topic: "",
+    title: "",
+    tags: "",
+    article: "",
+    citations: "",
+    bibliography: "",
+    comments: ""
+  };
 
-});
+  return blog;
+}
 
-module.exports = mongoose.model('blog', BlogSchema);
+module.exports = Blog;
