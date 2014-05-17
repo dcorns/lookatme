@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-casper');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-simple-mocha');
 
     grunt.initConfig({
 
@@ -40,6 +41,7 @@ module.exports = function(grunt) {
                 }
             }
         },
+
         express: {
             options: {
                 port: 8080
@@ -71,12 +73,24 @@ module.exports = function(grunt) {
                     'test/acceptance/casper-results.xml': ['test/acceptance/*_test.js']
                 }
             }
-        }
+        },
+
+      simplemocha: {
+        options: {
+          globals: ['should'],
+          timeout: 3000,
+          ignoreLeaks: false,
+          ui: 'bdd',
+          reporter: 'tap'
+        },
+
+        all: { src: ['test/unit/*.js'] }
+      }
 
     });
 
     //when using watch, all the watch tasks must preceed watch in the registerTask statement
     grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
     grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('test', ['shell:mongodb', 'express:dev', 'casper', 'watch']);
+    grunt.registerTask('test', ['simplemocha', 'shell:mongodb', 'express:dev', 'casper', 'watch']);
 };

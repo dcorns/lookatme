@@ -10,24 +10,17 @@ function User() {
       homePhone: "",
       workPhone: "",
       objective: "",
-      links: [],
-      skills: [],
-      education: [],
-      employmentHistory: [],
-      interests: [],
-      publications: [],
-      certifications: [],
-      awards: [],
-      references: [
-        {
-          name: "",
-          phone: "",
-          company: "",
-          comment: ""
-        }
-      ]
+      links: "",
+      skills: "",
+      education: "",
+      employmentHistory: "",
+      interests: "",
+      publications: "",
+      certifications: "",
+      awards: "",
+      references: ""
     }
-  return user;;
+  return user;
 }
 
-module.exports = User
+module.exports = User;
