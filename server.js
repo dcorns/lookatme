@@ -34,7 +34,11 @@ router.route('/users')
 .post(function(req, res){dataBase.createUser(req, res);})
 
 //get all users accessed at /api/users
-.get(function(req, res){dataBase.getAllUsers(req, res);});
+.get(function(req, res){
+    res.set('Status','200');
+    res.set('Content Type', '/json/');
+    dataBase.getAllUsers(req, res);
+  });
 
 //On routes that end in /api/users/:user_id
 //Note /:param1/:param2/:param3...(req.params.param1 etc.) and ?getvar1=value&getvar2=value&getvar3=value...(req.query.getvar1 etc.)

@@ -7,6 +7,7 @@ var BSON = require('mongodb').BSONPure; //npm install mongodb
 
 
 exports.landing = function(req, res){
+  res.set('Status','200');
   res.render('index');
 }
 
