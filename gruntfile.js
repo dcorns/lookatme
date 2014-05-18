@@ -39,11 +39,7 @@ module.exports = function(grunt) {
                         cwd: '.'
                     }
                 }
-            },
-            resttest: {
-              command: 'mocha test/api/user_apiTest.js'
-          }
-
+            }
         },
 
         express: {
@@ -88,7 +84,7 @@ module.exports = function(grunt) {
           reporter: 'tap'
         },
 
-        all: { src: ['test/unit/*.js'] }
+        all: { src: ['test/unit/*.js', 'test/api/*.js'] }
       }
 
     });
@@ -96,6 +92,5 @@ module.exports = function(grunt) {
     //when using watch, all the watch tasks must preceed watch in the registerTask statement
     grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
     grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('test', ['simplemocha','shell:mongodb', 'express:dev', 'casper', 'watch']);
-    grunt.registerTask('testRest',['shell:mongodb', 'shell:resttest']);
+    grunt.registerTask('test', ['shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
 };

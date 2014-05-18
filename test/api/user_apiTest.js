@@ -7,7 +7,8 @@ var chai =  require('chai');
 var expect = chai.expect;
 var should = chai.should();
 
-var app = require('../../server.js').app;
+//user to start server if not already started
+//var app = require('../../server.js').app;
 
 it ('get /api/user should return json data array', function(done){
   request('http://127.0.0.1:8080')
