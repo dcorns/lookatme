@@ -87,7 +87,7 @@ module.exports = function(grunt) {
         },
 
 
-        all: { src: ['test/unit/*.js'] }
+        all: { src: ['test/unit/*.js', 'test/api/*.js'] }
       },
 
       jshint: {
