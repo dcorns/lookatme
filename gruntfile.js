@@ -7,9 +7,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.initConfig({
-        pkg:grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON('package.json'),
         watch: {
             source: {
                 files: ['sass/**/*.scss'],
@@ -100,14 +102,29 @@ module.exports = function(grunt) {
           }
         }
 
+      },
+      concat:{
+        options: {
+          separator: ';'
+        },
+        dist: {
+          src: ['app/**/*.js'],
+          dest: 'dist/<%= pkg.name %>.js'
+        }
+      },
+      clean:{
+        build: ['dist'],
+        prod: ['dist']
       }
 
 
     });
 
-    //when using watch, all the watch tasks must preceed watch in the registerTask statement
-    grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('test', ['jshint', 'shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
+  //when using watch, all the watch tasks must preceed watch in the registerTask statement
+  grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
+  grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
+  grunt.registerTask('test', ['jshint', 'shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
+  grunt.registerTask('Ctest', ['concat']);
+  grunt.registerTask('Cltest', ['clean']);
 
 };

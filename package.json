@@ -33,6 +33,7 @@
     "grunt-browserify": "^2.0.8",
     "grunt-casper": "^0.3.7",
     "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-concat": "^0.4.0",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-express-server": "^0.4.17",
@@ -50,5 +51,8 @@
     "mongoose": "^3.8.8",
     "node-sass": "^0.8.6",
     "supertest": "^0.12.0"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
