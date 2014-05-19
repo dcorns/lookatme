@@ -6,7 +6,7 @@ var app = express();
 var bodyParser = require('body-parser'); //for getting data from a post
 var UserRoutes = require('./api/routes/userroutes.js');
 var dataBase = require('./api/database');
-var handlebars = require('handlebars');
+//var handlebars = require('handlebars');
 var cons = require('consolidate');
 
 app.use(bodyParser());

@@ -1,7 +1,11 @@
 /**
  * Created by dcorns on 5/17/14.
  */
+
+'use strict';
+var chai = require(chai);
 var expect = chai.expect;
+var User = require('../../api/models/user');
 
 describe('User object tests', function() {
   var user;
@@ -13,7 +17,7 @@ describe('User object tests', function() {
   describe('constructor', function() {
 
     it('user should be truthy (exists)', function() {
-      expect(user).to.be.ok;
+      expect(user).to.be.ok();
     });
 
     it('user should have lastName property', function() {

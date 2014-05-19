@@ -1,13 +1,14 @@
 /**
  * Created by dcorns on 5/17/14.
  */
-
+'use strict';
 var request = require('supertest');
 var chai =  require('chai');
 var expect = chai.expect;
 var should = chai.should();
 
-var app = require('../../server.js').app;
+//uncomment this to start server before test
+//var app = require('../../server.js').app;
 
 it ('get /api/user should return json data array', function(done){
   request('http://127.0.0.1:8080')

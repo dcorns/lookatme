@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 function User() {
   var user = {
 
@@ -19,7 +19,7 @@ function User() {
       certifications: "",
       awards: "",
       references: ""
-    }
+    };
   return user;
 }
 

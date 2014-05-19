@@ -1,6 +1,9 @@
 /**
  * Created by dcorns on 5/16/14.
  */
+
+'use strict';
+
 var expect = require('chai').expect;
 var User = require('../../api/models/user');
 
@@ -14,7 +17,8 @@ describe('User object test',function () {
   describe('constructor', function() {
 
     it('user should be truthy (exists)', function () {
-      expect(user).to.be.ok;
+      //Added return to pass jshint
+      return expect(user).to.be.ok;
     });
   });
 
@@ -87,7 +91,7 @@ describe('User object test',function () {
   });
 
   it('user links property matches beforeEach', function() {
-    expect(user.links).to.equal("");
+    expect(user.links).to.equal('');
   });
 
   it('user should have skills property', function() {
@@ -95,7 +99,7 @@ describe('User object test',function () {
   });
 
   it('user skills property matches beforeEach', function() {
-    expect(user.skills).to.equal("");
+    expect(user.skills).to.equal('');
   });
 
   it('user should have education property', function() {
@@ -103,7 +107,7 @@ describe('User object test',function () {
   });
 
   it('user education property matches beforeEach', function() {
-    expect(user.education).to.equal("");
+    expect(user.education).to.equal('');
   });
 
   it('user should have employmentHistory property', function() {
@@ -111,7 +115,7 @@ describe('User object test',function () {
   });
 
   it('user employmentHistory property matches beforeEach', function() {
-    expect(user.employmentHistory).to.equal("");
+    expect(user.employmentHistory).to.equal('');
   });
 
   it('user should have interests property', function() {
@@ -119,7 +123,7 @@ describe('User object test',function () {
   });
 
   it('user interests property matches beforeEach', function() {
-    expect(user.interests).to.equal("");
+    expect(user.interests).to.equal('');
   });
 
   it('user should have publications property', function() {
@@ -127,7 +131,7 @@ describe('User object test',function () {
   });
 
   it('user publications property matches beforeEach', function() {
-    expect(user.publications).to.equal("");
+    expect(user.publications).to.equal('');
   });
 
   it('user should have certifications property', function() {
@@ -135,7 +139,7 @@ describe('User object test',function () {
   });
 
   it('user certifications property matches beforeEach', function() {
-    expect(user.certifications).to.equal("");
+    expect(user.certifications).to.equal('');
   });
 
   it('user should have awards property', function() {
@@ -143,7 +147,7 @@ describe('User object test',function () {
   });
 
   it('user awards property matches beforeEach', function() {
-    expect(user.awards).to.equal("");
+    expect(user.awards).to.equal('');
   });
 
   it('user should have references property', function() {
@@ -151,7 +155,7 @@ describe('User object test',function () {
   });
 
   it('user references property matches beforeEach', function() {
-    expect(user.references).to.equal("");
+    expect(user.references).to.equal('');
   });
 
 });

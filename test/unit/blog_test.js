@@ -2,6 +2,8 @@
  * Created by dcorns on 5/17/14.
  */
 
+'use strict';
+
 var expect = require('chai').expect;
 var Blog = require('../../api/models/blog');
 
@@ -15,7 +17,8 @@ describe('Blog object test',function () {
   describe('constructor', function() {
 
     it('blog should be truthy (exists)', function () {
-      expect(blog).to.be.ok;
+      //added return to pass jshint
+      return expect(blog).to.be.ok;
     });
   });
 

@@ -1,14 +1,15 @@
 module.exports = function(grunt) {
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-shell-spawn');
-    grunt.loadNpmTasks('grunt-express-server');
-    grunt.loadNpmTasks('grunt-casper');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-shell-spawn');
+  grunt.loadNpmTasks('grunt-express-server');
+  grunt.loadNpmTasks('grunt-casper');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-simple-mocha');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.initConfig({
-
+        pkg:grunt.file.readJSON('package.json'),
         watch: {
             source: {
                 files: ['sass/**/*.scss'],
@@ -81,6 +82,7 @@ module.exports = function(grunt) {
 
       simplemocha: {
         options: {
+          colors: true,
           globals: ['should'],
           timeout: 3000,
           ignoreLeaks: false,
@@ -89,13 +91,25 @@ module.exports = function(grunt) {
         },
 
         all: { src: ['test/unit/*.js'] }
+      },
+
+      jshint: {
+        all: ['Gruntfile.js', 'server.js', 'api/models/**/*.js', 'test/**/*.js'],
+        options: {
+          jshintrc: true,
+          globals: {
+            console: true,
+            module: true
+          }
+        }
       }
+
 
     });
 
     //when using watch, all the watch tasks must preceed watch in the registerTask statement
     grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
     grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
-    grunt.registerTask('test', ['simplemocha','shell:mongodb', 'express:dev', 'casper', 'watch']);
+    grunt.registerTask('test', ['jshint', 'simplemocha','shell:mongodb', 'express:dev', 'casper', 'watch']);
     grunt.registerTask('testRest',['shell:mongodb', 'shell:resttest']);
 };

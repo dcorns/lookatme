@@ -1,12 +1,11 @@
 {
-  // Provided by Ivan Stork https://github.com/ivanoats
   // Details: https://github.com/victorporof/Sublime-JSHint#using-your-own-jshintrc-options
   // Example: https://github.com/jshint/jshint/blob/master/examples/.jshintrc
   // Documentation: http://www.jshint.com/docs/
   "browser": true,
   "esnext": true,
   "globals": {
-    // MOCHA and CHAI
+    // MOCHA and CHAI and Casper
     "describe"   : false,
     "it"         : false,
     "to"         : false,
@@ -16,7 +15,8 @@
     "beforeEach" : false,
     "after"      : false,
     "afterEach"  : false,
-    "equal"      : false
+    "equal"      : false,
+    "casper"     : false  //avoid undefined error in casper test files
   },
   "globalstrict": true,
   "quotmark": true,
