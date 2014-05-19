@@ -5,13 +5,15 @@
 var MongoClient = require('mongodb').MongoClient;//npm install mongodb
 var User = require('./models/user');
 var BSON = require('mongodb').BSONPure; //npm install mongodb
-
+var mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/onlineResumeDev';
 var dataBase = (function (){
 
   return{
     getAllUsers:function(req, res){
       console.log('Running getAllUsers...');
-      MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err,db){
+      MongoClient.connect(mongoUri, function(err,db){
         if(err) throw err;
         db.collection('users').find({}).toArray(function(err, docs){
           if (err) res.send(err);
@@ -41,7 +43,7 @@ var dataBase = (function (){
       user.certifications = req.body.certifications;
       user.awards = req.body.awards;
       user.references = req.body.references;
-      MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err,db){
+      MongoClient.connect(mongoUri, function(err,db){
         if(err) throw err;
         db.collection('users').insert(user,function(err, inserted) {
           if (err)
@@ -56,7 +58,7 @@ var dataBase = (function (){
     },
     getUserById:function(req, res){
       console.log('Running getUserById...');
-      MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err,db){
+      MongoClient.connect(mongoUri, function(err,db){
         if(err) throw err;
         var query = BSON.ObjectID.createFromHexString(req.params.id);
         db.collection('users').findOne({_id: query}, function(err, doc){
@@ -69,7 +71,7 @@ var dataBase = (function (){
     },
     updateUserByID:function(req, res){
       console.log('Running updateUserById...');
-      MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err,db){
+      MongoClient.connect(mongoUri, function(err,db){
         if(err) throw err;
         var id = BSON.ObjectID.createFromHexString(req.params.id);
         var query = {'_id': id};
@@ -93,7 +95,7 @@ var dataBase = (function (){
     },
     deleteUserById:function(req, res){
       console.log('Running deleteUserById...');
-      MongoClient.connect('mongodb://localhost:27017/onlineResumeDev', function(err,db){
+      MongoClient.connect(mongoUri, function(err,db){
         if(err) throw err;
         var id = BSON.ObjectID.createFromHexString(req.params.id);
         db.collection('users').remove({
