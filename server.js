@@ -35,8 +35,8 @@ router.route('/users')
 
 //get all users accessed at /api/users
 .get(function(req, res){
-    res.set('Status','200');
-    res.set('Content Type', '/json/');
+    //res.set('Status','200');
+   // res.set('Content Type', '/json/');
     dataBase.getAllUsers(req, res);
   });
 
