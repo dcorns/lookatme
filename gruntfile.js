@@ -150,11 +150,11 @@ module.exports = function(grunt) {
     });
 
   //when using watch, all the watch tasks must preceed watch in the registerTask statement
-  grunt.registerTask('default', ['shell:mongodb', 'express:dev', 'watch']);
+  grunt.registerTask('default', ['clean:build', 'copy:dev', 'browserify', 'shell:mongodb', 'express:dev', 'watch']);
   grunt.registerTask('server', ['shell:mongodb', 'express:dev', 'watch']);
   grunt.registerTask('test', ['jshint', 'shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
   grunt.registerTask('Ctest', ['concat']);
   grunt.registerTask('Cltest', ['clean']);
-  grunt.registerTask('build',['clean:build','copy:dev','browserify']);
+  grunt.registerTask('build',['clean:build', 'copy:dev', 'browserify']);
 
 };
