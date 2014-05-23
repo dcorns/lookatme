@@ -10,6 +10,7 @@
   var Backbone = require('backbone');
   Backbone.$ = $;
   var User = require('../js/models/usermdl');
+  var Users = require('../js/models/usermdls');
   var UserView = require('../js/views/UserView');
 //Models and Views
 
@@ -18,5 +19,12 @@
   user.set('firstName', 'Lisa');
   user.set('email', 'lmlagumina@gmail.com');
 
-
+$(function(){
+  var collection = new Users();
+  collection.fetch({},{
+    success: function() {
+      console.dir(this);
+    }
+  });
+});
 

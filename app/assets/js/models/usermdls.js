@@ -5,7 +5,7 @@
 var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
-var User = require('../models/user');
+var User = require('../models/usermdl');
 
 module.exports = Backbone.Collection.extend({
   model: User,

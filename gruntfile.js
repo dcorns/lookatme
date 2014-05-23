@@ -155,6 +155,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
   grunt.registerTask('Ctest', ['concat']);
   grunt.registerTask('Cltest', ['clean']);
-  grunt.registerTask('Build',['clean:build','copy:dev','browserify']);
+  grunt.registerTask('build',['clean:build','copy:dev','browserify']);
 
 };
