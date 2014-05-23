@@ -17,15 +17,6 @@
   user.set('lastName', 'Lagumina');
   user.set('firstName', 'Lisa');
   user.set('email', 'lmlagumina@gmail.com');
-//console.log($("<div class='user'>{{email}}</div>").appendTo($("body")));
-  $("<div class='user'>Hello {{email}}</div>").appendTo($("body"));
 
-  $(function () {
-    // Now instantiate our view and render!
-    var userView = new UserView({
-      model: user
-    });
-    userView.render();
-  });
 
 

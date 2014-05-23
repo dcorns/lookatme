@@ -5,32 +5,33 @@
 'use strict';
 
 // browserify load libraries
-var $ = require("./../../../bower_components/jquery/dist/jquery.js");
-var _ = require("./../../../bower_components/underscore/underscore.js");
-var Backbone = require("./../../../bower_components/backbone/backbone.js");
-Backbone.$ = $;
-var User = require('../js/models/usermdl');
-var UserView = require('../js/views/UserView');
+
+  var $ = require("./../../../bower_components/jquery/dist/jquery.js");
+  var _ = require("./../../../bower_components/underscore/underscore.js");
+  var Backbone = require("./../../../bower_components/backbone/backbone.js");
+  Backbone.$ = $;
+  var User = require('../js/models/usermdl');
+  var UserView = require('../js/views/UserView');
 //Models and Views
 
-var user = new User();
-user.set('lastName', 'Lagumina');
-user.set('firstName', 'Lisa');
-user.set('email', 'lmlagumina@gmail.com');
+  var user = new User();
+  user.set('lastName', 'Lagumina');
+  user.set('firstName', 'Lisa');
+  user.set('email', 'lmlagumina@gmail.com');
 
-var userV = new UserView({
-  model: user
-});
-userV.render();
-console.dir(userV.render());
-console.dir(userV);
+
+
 
 },{"../js/models/usermdl":2,"../js/views/UserView":3,"./../../../bower_components/backbone/backbone.js":5,"./../../../bower_components/jquery/dist/jquery.js":6,"./../../../bower_components/underscore/underscore.js":7}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
  */
 
-var Backbone =  require("./../../../../bower_components/backbone/backbone.js");
+
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+var _ = require("./../../../../bower_components/underscore/underscore.js");
+var Backbone = require("./../../../../bower_components/backbone/backbone.js");
+Backbone.$ = $;
 'use strict';
 module.exports = Backbone.Model.extend({
     defaults: {lastName: "",
@@ -53,26 +54,27 @@ module.exports = Backbone.Model.extend({
     }
   });
 
-},{"./../../../../bower_components/backbone/backbone.js":5}],3:[function(require,module,exports){
-var Backbone = require("./../../../../bower_components/backbone/backbone.js");
-var $        = require("./../../../../bower_components/jquery/dist/jquery.js");
-Backbone.$   = $;
-
+},{"./../../../../bower_components/backbone/backbone.js":5,"./../../../../bower_components/jquery/dist/jquery.js":6,"./../../../../bower_components/underscore/underscore.js":7}],3:[function(require,module,exports){
 'use strict';
+
+var Backbone = require("./../../../../bower_components/backbone/backbone.js");
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+Backbone.$ = $;
+
 module.exports = Backbone.View.extend({
-  tagName: 'div',
-  className: 'user',
+    tagName: 'div',
+    className: 'user',
 
-  initialize: function() {
-    this.render();
-  },
+    initialize: function() {
+        this.render();
+    },
 
-  render: function() {
-    var userAttributes = this.model.toJSON();
-    var template = require('../../templates/usertmp.hbs');
-    this.$el.html(template(userAttributes));
-    return this;
-  }
+    render: function() {
+        var userAttributes = this.model.toJSON();
+        var template = require('../../templates/usertmp.hbs');
+        this.$el.html(template(userAttributes));
+        return this;
+    }
 });
 
 },{"../../templates/usertmp.hbs":4,"./../../../../bower_components/backbone/backbone.js":5,"./../../../../bower_components/jquery/dist/jquery.js":6}],4:[function(require,module,exports){
@@ -12650,4 +12652,4 @@ module.exports = require('./dist/cjs/handlebars.runtime');
 },{"./dist/cjs/handlebars.runtime":8}],15:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":14}]},{},[1,2,3])
+},{"handlebars/runtime":14}]},{},[1])

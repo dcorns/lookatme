@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         var userAttributes = this.model.toJSON();
-        var template = require('../../templates/user.hbs');
+        var template = require('../../templates/usertmp.hbs');
         this.$el.html(template(userAttributes));
         return this;
     }

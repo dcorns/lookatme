@@ -9,6 +9,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-browserify');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -113,8 +114,36 @@ module.exports = function(grunt) {
         }
       },
       clean:{
-        build: ['dist'],
+        build: ['build'],
         prod: ['dist']
+      },
+      copy: {
+        prod: {
+          expand: true,
+          cwd: 'app/assets',
+          src: ['css/*.css', '*.html', 'images/**/*' ],
+          dest: 'dist/',
+          flatten: false,
+          filter: 'isFile'
+        },
+        dev: {
+          expand: true,
+          cwd: 'app/assets',
+          src: ['css/*.css', '*.html', 'images/**/*' ],
+          dest: 'build/',
+          flatten: false,
+          filter: 'isFile'
+        }
+      },
+      browserify: {
+        prod: {
+          src: ['app/assets/js/*.js'],
+          dest: 'build/browser.js',
+          options: {
+            transform: ['debowerify', 'hbsfy'],
+            debug: true
+          }
+        }
       }
 
 
@@ -126,5 +155,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', ['jshint', 'shell:mongodb', 'express:dev', 'casper','simplemocha', 'watch']);
   grunt.registerTask('Ctest', ['concat']);
   grunt.registerTask('Cltest', ['clean']);
+  grunt.registerTask('Build',['clean:build','copy:dev','browserify']);
 
 };
