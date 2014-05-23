@@ -30,6 +30,7 @@ $(function(){
 });
 
 
+
 },{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/views/UserView":4,"./../../../bower_components/backbone/backbone.js":6,"./../../../bower_components/jquery/dist/jquery.js":7,"./../../../bower_components/underscore/underscore.js":8}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
