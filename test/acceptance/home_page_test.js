@@ -7,7 +7,7 @@ casper.test.begin('home page', 7, function suite(test) {
     });
 
     casper.then(function() {
-        test.assertTitle('OnlineResume | Home', 'title is OnlineResume | Home');
+        test.assertTitle('DaleCorns | Home', 'title is OnlineResume | Home');
     });
 
     casper.then(function() {

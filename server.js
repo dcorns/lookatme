@@ -16,6 +16,7 @@ app.engine('hbs', cons.handlebars);
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/app/assets/templates');
 
+app.use(express.static(__dirname + '/build'));
 //set up envs
 var port = process.env.PORT || 8080;
 
