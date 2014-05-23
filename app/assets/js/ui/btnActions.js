@@ -6,8 +6,18 @@
 
 var $ = require('jquery');
 
-module.exports = (function (){
+module.exports = $(function(){
   $( ".btn" ).click(function() {
-    alert( this.id );
+    switch(this.id){
+      case 'btnEditMode':
+        alert('btnEditMode click');
+        break;
+      case 'btnViewMode':
+        alert('btnViewMode click');
+        break;
+      default:
+        alert('No action defined');
+        break;
+    }
   });
 });

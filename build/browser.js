@@ -4,8 +4,6 @@
  */
 'use strict';
 
-// browserify load libraries
-
   var $ = require("./../../../bower_components/jquery/dist/jquery.js");
   var _ = require("./../../../bower_components/underscore/underscore.js");
   var Backbone = require("./../../../bower_components/backbone/backbone.js");
@@ -14,12 +12,12 @@
   var Users = require('../js/models/usermdls');
   var UserView = require('../js/views/UserView');
   var UserViews = require('../js/views/UserViews');
-//Models and Views
+  require('../js/ui/btnActions');
 
-  var user = new User();
+  /*var user = new User();
   user.set('lastName', 'Lagumina');
   user.set('firstName', 'Lisa');
-  user.set('email', 'lmlagumina@gmail.com');
+  user.set('email', 'lmlagumina@gmail.com');*/
 
 /*$(function(){
   var collection = new Users();
@@ -40,12 +38,14 @@ $(function(){
   });
 });
 
+/*
 $(function(){
   $( ".btn" ).click(function() {
     alert( this.id );
   });
-});
-},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/views/UserView":4,"../js/views/UserViews":5,"./../../../bower_components/backbone/backbone.js":7,"./../../../bower_components/jquery/dist/jquery.js":8,"./../../../bower_components/underscore/underscore.js":9}],2:[function(require,module,exports){
+});*/
+
+},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/ui/btnActions":4,"../js/views/UserView":5,"../js/views/UserViews":6,"./../../../bower_components/backbone/backbone.js":8,"./../../../bower_components/jquery/dist/jquery.js":9,"./../../../bower_components/underscore/underscore.js":10}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
  */
@@ -77,7 +77,7 @@ module.exports = Backbone.Model.extend({
     }
   });
 
-},{"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8,"./../../../../bower_components/underscore/underscore.js":9}],3:[function(require,module,exports){
+},{"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9,"./../../../../bower_components/underscore/underscore.js":10}],3:[function(require,module,exports){
 /**
  * Created by dcorns on 5/22/14.
  */
@@ -92,7 +92,31 @@ module.exports = Backbone.Collection.extend({
   url: '/api/users'
 });
 
-},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8}],4:[function(require,module,exports){
+},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9}],4:[function(require,module,exports){
+/**
+ * Created by dcorns on 5/23/14.
+ */
+
+'use strict';
+
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+
+module.exports = $(function(){
+  $( ".btn" ).click(function() {
+    switch(this.id){
+      case 'btnEditMode':
+        alert('btnEditMode click');
+        break;
+      case 'btnViewMode':
+        alert('btnViewMode click');
+        break;
+      default:
+        alert('No action defined');
+        break;
+    }
+  });
+});
+},{"./../../../../bower_components/jquery/dist/jquery.js":9}],5:[function(require,module,exports){
 'use strict';
 
 var Backbone = require("./../../../../bower_components/backbone/backbone.js");
@@ -115,7 +139,7 @@ module.exports = Backbone.View.extend({
     }
 });
 
-},{"../../templates/usertmp.hbs":6,"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8}],5:[function(require,module,exports){
+},{"../../templates/usertmp.hbs":7,"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9}],6:[function(require,module,exports){
 /**
  * Created by dcorns on 5/22/14.
  */
@@ -148,7 +172,7 @@ module.exports = Backbone.View.extend({
 
 });
 
-},{"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8,"./UserView":4}],6:[function(require,module,exports){
+},{"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9,"./UserView":5}],7:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -177,7 +201,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":17}],7:[function(require,module,exports){
+},{"hbsfy/runtime":18}],8:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1787,7 +1811,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 }));
 
-},{"./../underscore/underscore.js":9}],8:[function(require,module,exports){
+},{"./../underscore/underscore.js":10}],9:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.0
  * http://jquery.com/
@@ -10900,7 +10924,7 @@ return jQuery;
 
 }));
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -12245,7 +12269,7 @@ return jQuery;
   }
 }).call(this);
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -12278,7 +12302,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":11,"./handlebars/exception":12,"./handlebars/runtime":13,"./handlebars/safe-string":14,"./handlebars/utils":15}],11:[function(require,module,exports){
+},{"./handlebars/base":12,"./handlebars/exception":13,"./handlebars/runtime":14,"./handlebars/safe-string":15,"./handlebars/utils":16}],12:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12459,7 +12483,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":12,"./utils":15}],12:[function(require,module,exports){
+},{"./exception":13,"./utils":16}],13:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -12488,7 +12512,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12626,7 +12650,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":11,"./exception":12,"./utils":15}],14:[function(require,module,exports){
+},{"./base":12,"./exception":13,"./utils":16}],15:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -12638,7 +12662,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -12715,12 +12739,12 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":14}],16:[function(require,module,exports){
+},{"./safe-string":15}],17:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":10}],17:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":11}],18:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":16}]},{},[1])
+},{"handlebars/runtime":17}]},{},[1])

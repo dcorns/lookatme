@@ -3,8 +3,6 @@
  */
 'use strict';
 
-// browserify load libraries
-
   var $ = require('jquery');
   var _ = require('underscore');
   var Backbone = require('backbone');
@@ -13,12 +11,12 @@
   var Users = require('../js/models/usermdls');
   var UserView = require('../js/views/UserView');
   var UserViews = require('../js/views/UserViews');
-//Models and Views
+  require('../js/ui/btnActions');
 
-  var user = new User();
+  /*var user = new User();
   user.set('lastName', 'Lagumina');
   user.set('firstName', 'Lisa');
-  user.set('email', 'lmlagumina@gmail.com');
+  user.set('email', 'lmlagumina@gmail.com');*/
 
 /*$(function(){
   var collection = new Users();
@@ -39,8 +37,9 @@ $(function(){
   });
 });
 
+/*
 $(function(){
   $( ".btn" ).click(function() {
     alert( this.id );
   });
-});
+});*/
