@@ -39,3 +39,8 @@ $(function(){
   });
 });
 
+$(function(){
+  $( ".btn" ).click(function() {
+    alert( this.id );
+  });
+});

@@ -40,7 +40,11 @@ $(function(){
   });
 });
 
-
+$(function(){
+  $( ".btn" ).click(function() {
+    alert( this.id );
+  });
+});
 },{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/views/UserView":4,"../js/views/UserViews":5,"./../../../bower_components/backbone/backbone.js":7,"./../../../bower_components/jquery/dist/jquery.js":8,"./../../../bower_components/underscore/underscore.js":9}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
