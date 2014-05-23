@@ -4,7 +4,7 @@
 
 var Backbone = require('backbone');
 var $ = require('jquery');
-var UserView = require('../js/views/UserView');
+var UserView = require('./UserView');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({

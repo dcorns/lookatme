@@ -13,6 +13,7 @@
   var User = require('../js/models/usermdl');
   var Users = require('../js/models/usermdls');
   var UserView = require('../js/views/UserView');
+  var UserViews = require('../js/views/UserViews');
 //Models and Views
 
   var user = new User();
@@ -20,18 +21,27 @@
   user.set('firstName', 'Lisa');
   user.set('email', 'lmlagumina@gmail.com');
 
-$(function(){
+/*$(function(){
   var collection = new Users();
   collection.fetch({},{
     success: function() {
       console.dir(this);
     }
   });
+});*/
+
+$(function(){
+  var userCollection = new Users();
+  var userCollectionView = new UserViews({collection: userCollection});
+  userCollection.fetch({
+    success: function() {
+      $('.mainContent').html(userCollectionView.$el);
+    }
+  });
 });
 
 
-
-},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/views/UserView":4,"./../../../bower_components/backbone/backbone.js":6,"./../../../bower_components/jquery/dist/jquery.js":7,"./../../../bower_components/underscore/underscore.js":8}],2:[function(require,module,exports){
+},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/views/UserView":4,"../js/views/UserViews":5,"./../../../bower_components/backbone/backbone.js":7,"./../../../bower_components/jquery/dist/jquery.js":8,"./../../../bower_components/underscore/underscore.js":9}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
  */
@@ -63,7 +73,7 @@ module.exports = Backbone.Model.extend({
     }
   });
 
-},{"./../../../../bower_components/backbone/backbone.js":6,"./../../../../bower_components/jquery/dist/jquery.js":7,"./../../../../bower_components/underscore/underscore.js":8}],3:[function(require,module,exports){
+},{"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8,"./../../../../bower_components/underscore/underscore.js":9}],3:[function(require,module,exports){
 /**
  * Created by dcorns on 5/22/14.
  */
@@ -78,7 +88,7 @@ module.exports = Backbone.Collection.extend({
   url: '/api/users'
 });
 
-},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":6,"./../../../../bower_components/jquery/dist/jquery.js":7}],4:[function(require,module,exports){
+},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8}],4:[function(require,module,exports){
 'use strict';
 
 var Backbone = require("./../../../../bower_components/backbone/backbone.js");
@@ -101,7 +111,40 @@ module.exports = Backbone.View.extend({
     }
 });
 
-},{"../../templates/usertmp.hbs":5,"./../../../../bower_components/backbone/backbone.js":6,"./../../../../bower_components/jquery/dist/jquery.js":7}],5:[function(require,module,exports){
+},{"../../templates/usertmp.hbs":6,"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8}],5:[function(require,module,exports){
+/**
+ * Created by dcorns on 5/22/14.
+ */
+
+var Backbone = require("./../../../../bower_components/backbone/backbone.js");
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+var UserView = require('./UserView');
+Backbone.$ = $;
+
+module.exports = Backbone.View.extend({
+  className: 'notes',
+
+  initialize: function() {
+    this.collection.on('add', this.addUser, this);
+    this.collection.on('reset', this.addAll, this);
+  },
+
+  addUser: function(user) {
+    var userView = new UserView({model: user});
+    this.$el.append(userView.el);
+  },
+
+  addAll: function() {
+    this.collection.forEach(this.addUser);
+  },
+
+  render: function() {
+    this.addAll();
+  }
+
+});
+
+},{"./../../../../bower_components/backbone/backbone.js":7,"./../../../../bower_components/jquery/dist/jquery.js":8,"./UserView":4}],6:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -110,7 +153,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<p> class=\"full_name\">";
+  buffer += "<p> ";
   if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -118,7 +161,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.lastName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.lastName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</p>\n<p> class=\"email\"><a href=\"mailto:";
+    + "</p>\n<p> <a href=\"mailto:";
   if (helper = helpers.email) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.email); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -130,7 +173,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":16}],6:[function(require,module,exports){
+},{"hbsfy/runtime":17}],7:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1740,7 +1783,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 }));
 
-},{"./../underscore/underscore.js":8}],7:[function(require,module,exports){
+},{"./../underscore/underscore.js":9}],8:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.0
  * http://jquery.com/
@@ -10853,7 +10896,7 @@ return jQuery;
 
 }));
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -12198,7 +12241,7 @@ return jQuery;
   }
 }).call(this);
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -12231,7 +12274,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":10,"./handlebars/exception":11,"./handlebars/runtime":12,"./handlebars/safe-string":13,"./handlebars/utils":14}],10:[function(require,module,exports){
+},{"./handlebars/base":11,"./handlebars/exception":12,"./handlebars/runtime":13,"./handlebars/safe-string":14,"./handlebars/utils":15}],11:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12412,7 +12455,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":11,"./utils":14}],11:[function(require,module,exports){
+},{"./exception":12,"./utils":15}],12:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -12441,7 +12484,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12579,7 +12622,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":10,"./exception":11,"./utils":14}],13:[function(require,module,exports){
+},{"./base":11,"./exception":12,"./utils":15}],14:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -12591,7 +12634,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -12668,12 +12711,12 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":13}],15:[function(require,module,exports){
+},{"./safe-string":14}],16:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":9}],16:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":10}],17:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":15}]},{},[1])
+},{"handlebars/runtime":16}]},{},[1])
