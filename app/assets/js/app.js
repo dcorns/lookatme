@@ -11,14 +11,13 @@ var User = require('../js/models/usermdl');
 var Users = require('../js/models/usermdls');
 var IndexViews = require('../js/views/IndexViews');
 require('../js/ui/btnActions');
-
+var userCollection = new Users();
 
 $(function(){
-  var userCollection = new Users();
   var userCollectionView = new IndexViews({collection: userCollection});
   userCollection.fetch({
     success: function() {
-      $('.mainContent').html(userCollectionView.$el);
+      $('.userList').html(userCollectionView.$el);
     }
   });
 });

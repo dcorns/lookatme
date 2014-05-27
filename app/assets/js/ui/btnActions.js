@@ -5,7 +5,6 @@
 'use strict';
 
 var $ = require('jquery');
-var epv = require('../views/editPersonalView');
 
 module.exports = $(function(){
   $( ".btn" ).click(function() {
@@ -14,7 +13,7 @@ module.exports = $(function(){
         alert('btnEditMode click');
         $(".E").show();
         $(".V").hide();
-        epv();
+        $(".editContent").append("<form class='E' id='Personal'><label class='E' for='firstName'>First Name</label><input class='E' id='firstName'><label class='E' for='lastName'>Last Name</label><input class='E' id='lastName'><label class='E' for='email'>Email</label><input class='E' id='email'></form>");
 
         break;
       case 'btnViewMode':
@@ -28,6 +27,7 @@ module.exports = $(function(){
         $(".E").hide();
         $(".V").show();
         $(".editContent").empty();
+
         break;
       default:
         alert('No action defined');

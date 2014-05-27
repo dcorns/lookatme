@@ -8,8 +8,8 @@ var IndexView = require('./IndexView');
 Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
+  tagName: 'select',
   className: 'users',
-
   initialize: function() {
     this.collection.on('add', this.addUser, this);
     this.collection.on('reset', this.addAll, this);
