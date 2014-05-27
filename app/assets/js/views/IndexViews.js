@@ -1,10 +1,9 @@
 /**
- * Created by dcorns on 5/22/14.
+ * Created by dcorns on 5/26/14.
  */
 
 var Backbone = require('backbone');
 var $ = require('jquery');
-var UserView = require('./UserView');
 var IndexView = require('./IndexView');
 Backbone.$ = $;
 
