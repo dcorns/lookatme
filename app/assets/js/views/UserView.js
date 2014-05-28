@@ -6,7 +6,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
     tagName: 'div',
-    className: 'user',
+    className: 'title',
 
     initialize: function() {
         this.render();
@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 
     render: function() {
         var userAttributes = this.model.toJSON();
-        var template = require('../../templates/indextmp.hbs');
+        var template = require('../../templates/usertmp.hbs');
         this.$el.html(template(userAttributes));
         return this;
     }

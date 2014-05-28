@@ -10,6 +10,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
   tagName:'option',
+  className:'btn',
   initialize: function() {
     this.render();
   },

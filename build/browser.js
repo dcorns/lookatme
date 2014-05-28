@@ -11,6 +11,7 @@ Backbone.$ = $;
 var User = require('../js/models/usermdl');
 var Users = require('../js/models/usermdls');
 var IndexViews = require('../js/views/IndexViews');
+var UserView = require('../js/views/UserView');
 require('../js/ui/btnActions');
 var userCollection = new Users();
 
@@ -19,6 +20,9 @@ $(function(){
   userCollection.fetch({
     success: function() {
       $('.userList').html(userCollectionView.$el);
+      var user = userCollection.at(0);
+      var userView = new UserView({model: user});
+      $('.title').html(userView.$el);
     }
   });
 });
@@ -28,7 +32,7 @@ $(function(){
 });
 
 
-},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/ui/btnActions":4,"../js/views/IndexViews":6,"./../../../bower_components/backbone/backbone.js":8,"./../../../bower_components/jquery/dist/jquery.js":9,"./../../../bower_components/underscore/underscore.js":10}],2:[function(require,module,exports){
+},{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/ui/btnActions":4,"../js/views/IndexViews":6,"../js/views/UserView":7,"./../../../bower_components/backbone/backbone.js":11,"./../../../bower_components/jquery/dist/jquery.js":12,"./../../../bower_components/underscore/underscore.js":13}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
  */
@@ -60,7 +64,7 @@ module.exports = Backbone.Model.extend({
     }
   });
 
-},{"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9,"./../../../../bower_components/underscore/underscore.js":10}],3:[function(require,module,exports){
+},{"./../../../../bower_components/backbone/backbone.js":11,"./../../../../bower_components/jquery/dist/jquery.js":12,"./../../../../bower_components/underscore/underscore.js":13}],3:[function(require,module,exports){
 /**
  * Created by dcorns on 5/22/14.
  */
@@ -75,7 +79,7 @@ module.exports = Backbone.Collection.extend({
   url: '/api/users'
 });
 
-},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9}],4:[function(require,module,exports){
+},{"../models/usermdl":2,"./../../../../bower_components/backbone/backbone.js":11,"./../../../../bower_components/jquery/dist/jquery.js":12}],4:[function(require,module,exports){
 /**
  * Created by dcorns on 5/23/14.
  */
@@ -83,6 +87,7 @@ module.exports = Backbone.Collection.extend({
 'use strict';
 
 var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+var ePV = require('../views/editPersonalView');
 
 module.exports = $(function(){
   $( ".btn" ).click(function() {
@@ -91,7 +96,8 @@ module.exports = $(function(){
         alert('btnEditMode click');
         $(".E").show();
         $(".V").hide();
-        $(".editContent").append("<form class='E' id='Personal'><label class='E' for='firstName'>First Name</label><input class='E' id='firstName'><label class='E' for='lastName'>Last Name</label><input class='E' id='lastName'><label class='E' for='email'>Email</label><input class='E' id='email'></form>");
+        ePV();
+        //$(".editContent").append("<form class='E' id='Personal'><label class='E' for='firstName'>First Name</label><input class='E' id='firstName'><label class='E' for='lastName'>Last Name</label><input class='E' id='lastName'><label class='E' for='email'>Email</label><input class='E' id='email'></form>");
 
         break;
       case 'btnViewMode':
@@ -113,7 +119,7 @@ module.exports = $(function(){
     }
   });
 });
-},{"./../../../../bower_components/jquery/dist/jquery.js":9}],5:[function(require,module,exports){
+},{"../views/editPersonalView":8,"./../../../../bower_components/jquery/dist/jquery.js":12}],5:[function(require,module,exports){
 /**
  * Created by dcorns on 5/23/14.
  */
@@ -126,6 +132,7 @@ Backbone.$ = $;
 
 module.exports = Backbone.View.extend({
   tagName:'option',
+  className:'btn',
   initialize: function() {
     this.render();
   },
@@ -139,7 +146,7 @@ module.exports = Backbone.View.extend({
 
 
 });
-},{"../../templates/indextmp.hbs":7,"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9}],6:[function(require,module,exports){
+},{"../../templates/indextmp.hbs":9,"./../../../../bower_components/backbone/backbone.js":11,"./../../../../bower_components/jquery/dist/jquery.js":12}],6:[function(require,module,exports){
 /**
  * Created by dcorns on 5/26/14.
  */
@@ -171,7 +178,42 @@ module.exports = Backbone.View.extend({
   }
 
 });
-},{"./../../../../bower_components/backbone/backbone.js":8,"./../../../../bower_components/jquery/dist/jquery.js":9,"./IndexView":5}],7:[function(require,module,exports){
+},{"./../../../../bower_components/backbone/backbone.js":11,"./../../../../bower_components/jquery/dist/jquery.js":12,"./IndexView":5}],7:[function(require,module,exports){
+'use strict';
+
+var Backbone = require("./../../../../bower_components/backbone/backbone.js");
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+Backbone.$ = $;
+
+module.exports = Backbone.View.extend({
+    tagName: 'div',
+    className: 'title',
+
+    initialize: function() {
+        this.render();
+    },
+
+    render: function() {
+        var userAttributes = this.model.toJSON();
+        var template = require('../../templates/usertmp.hbs');
+        this.$el.html(template(userAttributes));
+        return this;
+    }
+});
+
+},{"../../templates/usertmp.hbs":10,"./../../../../bower_components/backbone/backbone.js":11,"./../../../../bower_components/jquery/dist/jquery.js":12}],8:[function(require,module,exports){
+/**
+ * Created by dcorns on 5/26/14.
+ */
+
+'use strict';
+
+var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
+
+module.exports = function() {
+    return $(".editContent").append("<form class='E' id='Personal'><label class='E' for='firstName'>First Name</label><input class='E' id='firstName'><label class='E' for='lastName'>Last Name</label><input class='E' id='lastName'><label class='E' for='email'>Email</label><input class='E' id='email'></form>");
+};
+},{"./../../../../bower_components/jquery/dist/jquery.js":12}],9:[function(require,module,exports){
 // hbsfy compiled Handlebars template
 var Handlebars = require('hbsfy/runtime');
 module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -191,7 +233,40 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-},{"hbsfy/runtime":18}],8:[function(require,module,exports){
+},{"hbsfy/runtime":21}],10:[function(require,module,exports){
+// hbsfy compiled Handlebars template
+var Handlebars = require('hbsfy/runtime');
+module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<h1>Portfollio for ";
+  if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  if (helper = helpers.lastName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.lastName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1><button id=";
+  if (helper = helpers._id) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0._id); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + ">EDIT</button>\n<p> <a href=\"mailto:";
+  if (helper = helpers.email) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.email); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">";
+  if (helper = helpers.email) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.email); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</a></p>\n";
+  return buffer;
+  });
+
+},{"hbsfy/runtime":21}],11:[function(require,module,exports){
 //     Backbone.js 1.1.2
 
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -1801,7 +1876,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 
 }));
 
-},{"./../underscore/underscore.js":10}],9:[function(require,module,exports){
+},{"./../underscore/underscore.js":13}],12:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.0
  * http://jquery.com/
@@ -10914,7 +10989,7 @@ return jQuery;
 
 }));
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 //     Underscore.js 1.6.0
 //     http://underscorejs.org
 //     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -12259,7 +12334,7 @@ return jQuery;
   }
 }).call(this);
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 "use strict";
 /*globals Handlebars: true */
 var base = require("./handlebars/base");
@@ -12292,7 +12367,7 @@ var Handlebars = create();
 Handlebars.create = create;
 
 exports["default"] = Handlebars;
-},{"./handlebars/base":12,"./handlebars/exception":13,"./handlebars/runtime":14,"./handlebars/safe-string":15,"./handlebars/utils":16}],12:[function(require,module,exports){
+},{"./handlebars/base":15,"./handlebars/exception":16,"./handlebars/runtime":17,"./handlebars/safe-string":18,"./handlebars/utils":19}],15:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12473,7 +12548,7 @@ exports.log = log;var createFrame = function(object) {
   return obj;
 };
 exports.createFrame = createFrame;
-},{"./exception":13,"./utils":16}],13:[function(require,module,exports){
+},{"./exception":16,"./utils":19}],16:[function(require,module,exports){
 "use strict";
 
 var errorProps = ['description', 'fileName', 'lineNumber', 'message', 'name', 'number', 'stack'];
@@ -12502,7 +12577,7 @@ function Exception(message, node) {
 Exception.prototype = new Error();
 
 exports["default"] = Exception;
-},{}],14:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 var Utils = require("./utils");
 var Exception = require("./exception")["default"];
@@ -12640,7 +12715,7 @@ exports.program = program;function invokePartial(partial, name, context, helpers
 exports.invokePartial = invokePartial;function noop() { return ""; }
 
 exports.noop = noop;
-},{"./base":12,"./exception":13,"./utils":16}],15:[function(require,module,exports){
+},{"./base":15,"./exception":16,"./utils":19}],18:[function(require,module,exports){
 "use strict";
 // Build out our basic SafeString type
 function SafeString(string) {
@@ -12652,7 +12727,7 @@ SafeString.prototype.toString = function() {
 };
 
 exports["default"] = SafeString;
-},{}],16:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 /*jshint -W004 */
 var SafeString = require("./safe-string")["default"];
@@ -12729,12 +12804,12 @@ exports.escapeExpression = escapeExpression;function isEmpty(value) {
 }
 
 exports.isEmpty = isEmpty;
-},{"./safe-string":15}],17:[function(require,module,exports){
+},{"./safe-string":18}],20:[function(require,module,exports){
 // Create a simple path alias to allow browserify to resolve
 // the runtime on a supported path.
 module.exports = require('./dist/cjs/handlebars.runtime');
 
-},{"./dist/cjs/handlebars.runtime":11}],18:[function(require,module,exports){
+},{"./dist/cjs/handlebars.runtime":14}],21:[function(require,module,exports){
 module.exports = require("handlebars/runtime")["default"];
 
-},{"handlebars/runtime":17}]},{},[1])
+},{"handlebars/runtime":20}]},{},[1])
