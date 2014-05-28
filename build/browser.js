@@ -1,37 +1,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
- * Created by dcorns on 5/19/14.
+ * Created by dcorns on 5/19/14. Client entry point
  */
 'use strict';
 
-var $ = require("./../../../bower_components/jquery/dist/jquery.js");
-var _ = require("./../../../bower_components/underscore/underscore.js");
-var Backbone = require("./../../../bower_components/backbone/backbone.js");
-Backbone.$ = $;
-var User = require('../js/models/usermdl');
-var Users = require('../js/models/usermdls');
-var IndexViews = require('../js/views/IndexViews');
-var UserView = require('../js/views/UserView');
-require('../js/ui/btnActions');
-var userCollection = new Users();
+//Import Backbone dependencies
+  var $ = require("./../../../bower_components/jquery/dist/jquery.js");
+  var _ = require("./../../../bower_components/underscore/underscore.js");
+  var Backbone = require("./../../../bower_components/backbone/backbone.js");
+  Backbone.$ = $;
+$(function() {
+//Import Backbone models and views
+  var User = require('../js/models/usermdl');
+  var Users = require('../js/models/usermdls');
+  var IndexViews = require('../js/views/IndexViews');
+  var UserView = require('../js/views/UserView');
 
-$(function(){
-  var userCollectionView = new IndexViews({collection: userCollection});
-  userCollection.fetch({
-    success: function() {
-      $('.userList').html(userCollectionView.$el);
-      var user = userCollection.at(0);
-      var userView = new UserView({model: user});
-      $('.title').html(userView.$el);
-    }
+//Import ui control modules
+  require('../js/ui/btnActions');
+
+//Load and display the first window using the first user in the collection, and containing a drop down list of other users
+  $(function () {
+    var userCollection = new Users();
+    var userCollectionView = new IndexViews({collection: userCollection});
+    userCollection.fetch({
+      success: function () {
+        $('.userList').html(userCollectionView.$el);
+        var user = userCollection.at(0);
+        var userView = new UserView({model: user});
+        $('.title').html(userView.$el);
+      }
+    });
   });
+
+  $(function () {
+    $('.E').hide();
+  });
+
 });
-
-$(function(){
-  $('.E').hide();
-});
-
-
 },{"../js/models/usermdl":2,"../js/models/usermdls":3,"../js/ui/btnActions":4,"../js/views/IndexViews":6,"../js/views/UserView":7,"./../../../bower_components/backbone/backbone.js":11,"./../../../bower_components/jquery/dist/jquery.js":12,"./../../../bower_components/underscore/underscore.js":13}],2:[function(require,module,exports){
 /**
  * Created by dcorns on 5/21/14.
