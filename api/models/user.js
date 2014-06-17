@@ -1,3 +1,4 @@
+//mongo user model
 "use strict";
 function User() {
   var user = {

@@ -1,7 +1,7 @@
 /**
  * Created by dcorns on 5/17/14.
  */
-
+//user browser test
 'use strict';
 var chai = require(chai);
 var expect = chai.expect;

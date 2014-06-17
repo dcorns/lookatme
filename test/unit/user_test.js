@@ -1,7 +1,7 @@
 /**
  * Created by dcorns on 5/16/14.
  */
-
+//user model test
 'use strict';
 
 var expect = require('chai').expect;

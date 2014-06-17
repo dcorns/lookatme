@@ -1,21 +1,27 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
- * Created by dcorns on 5/19/14.
+ * Created by dcorns on 5/19/14. Client entry point
  */
 'use strict';
 
+//Import Backbone dependencies
 var $ = require("./../../../bower_components/jquery/dist/jquery.js");
 var _ = require("./../../../bower_components/underscore/underscore.js");
 var Backbone = require("./../../../bower_components/backbone/backbone.js");
 Backbone.$ = $;
+
+//Import Backbone models and views
 var User = require('../js/models/usermdl');
 var Users = require('../js/models/usermdls');
 var IndexViews = require('../js/views/IndexViews');
 var UserView = require('../js/views/UserView');
-require('../js/ui/btnActions');
-var userCollection = new Users();
 
+//Import ui control modules
+require('../js/ui/btnActions');
+
+//Load and display the first window using the first user in the collection, and containing a drop down list of other users
 $(function(){
+  var userCollection = new Users();
   var userCollectionView = new IndexViews({collection: userCollection});
   userCollection.fetch({
     success: function() {
@@ -242,7 +248,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<h1>Portfollio for ";
+  buffer += "Template for displaying user personal\n<h1>Portfollio for ";
   if (helper = helpers.firstName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.firstName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
