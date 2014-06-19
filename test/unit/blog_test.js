@@ -1,7 +1,7 @@
 /**
  * Created by dcorns on 5/17/14.
  */
-
+//blog model test
 'use strict';
 
 var expect = require('chai').expect;

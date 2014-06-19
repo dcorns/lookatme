@@ -1,6 +1,7 @@
 /**
  * Created by dcorns on 5/17/14.
  */
+//server side user testing
 'use strict';
 var request = require('supertest');
 var chai =  require('chai');

@@ -1,3 +1,4 @@
+//mongo blog model
 "use strict";
 
 function Blog(){

@@ -1,5 +1,5 @@
 'use strict';
-
+//Index.html test
 casper.test.begin('home page', 7, function suite(test) {
 
     casper.start('http://localhost:8080/', function() {
@@ -11,7 +11,7 @@ casper.test.begin('home page', 7, function suite(test) {
     });
 
     casper.then(function() {
-        test.assertSelectorHasText('h1', 'My Porfollio');
+        test.assertSelectorHasText('h1', 'Online Portfolios');
     });
     //Test for index elements
     casper.then(function() {
