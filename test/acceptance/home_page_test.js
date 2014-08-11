@@ -1,6 +1,6 @@
 'use strict';
 //Index.html test
-casper.test.begin('home page', 7, function suite(test) {
+casper.test.begin('home page', 13, function suite(test) {
 
     casper.start('http://localhost:8080/', function() {
         test.assertHttpStatus(200);
@@ -27,8 +27,32 @@ casper.test.begin('home page', 7, function suite(test) {
     });
 
     casper.then(function() {
-        test.assertExists('#btnInterests');
+      test.assertExists('#btnInterests');
     });
+
+  casper.then(function() {
+    test.assertExists('#btnAwards');
+  });
+
+  casper.then(function() {
+    test.assertExists('#btnPublications');
+  });
+
+  casper.then(function() {
+    test.assertExists('#btnReferences');
+  });
+
+  casper.then(function() {
+    test.assertExists('#btnEditMode');
+  });
+
+  casper.then(function() {
+    test.assertExists('#btnViewMode');
+  });
+
+  casper.then(function() {
+    test.assertExists('#btnSaveChanges');
+  });
 
     casper.run(function() {
         test.done();

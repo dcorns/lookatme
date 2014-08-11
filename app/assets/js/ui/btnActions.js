@@ -25,7 +25,7 @@ module.exports = $(function(){
         $(".editContent").empty();
         break;
       case 'btnSaveChanges':
-        alert('btnViewMode click');
+        alert('btnSaveChanges click');
         $(".E").hide();
         $(".V").show();
         $(".editContent").empty();
