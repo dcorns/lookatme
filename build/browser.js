@@ -113,7 +113,7 @@ module.exports = $(function(){
         $(".editContent").empty();
         break;
       case 'btnSaveChanges':
-        alert('btnViewMode click');
+        alert('btnSaveChanges click');
         $(".E").hide();
         $(".V").show();
         $(".editContent").empty();
@@ -161,7 +161,7 @@ var Backbone = require("./../../../../bower_components/backbone/backbone.js");
 var $ = require("./../../../../bower_components/jquery/dist/jquery.js");
 var IndexView = require('./IndexView');
 Backbone.$ = $;
-
+//Make a selection list for users
 module.exports = Backbone.View.extend({
   tagName: 'select',
   className: 'users',
@@ -169,16 +169,16 @@ module.exports = Backbone.View.extend({
     this.collection.on('add', this.addUser, this);
     this.collection.on('reset', this.addAll, this);
   },
-
+//define function for adding user to list
   addUser: function(user) {
     var indexView = new IndexView({model: user});
     this.$el.append(indexView.el);
   },
-
+//define function for adding all users to list
   addAll: function() {
     this.collection.forEach(this.addUser);
   },
-
+//display the user selection list
   render: function() {
     this.addAll();
   }

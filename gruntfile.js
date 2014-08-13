@@ -71,7 +71,7 @@ module.exports = function(grunt) {
         casper: {
             acceptance: {
                 options: {
-                    test: true,
+                    test: true
                 },
                 files: {
                     'test/acceptance/casper-results.xml': ['test/acceptance/*_test.js']
